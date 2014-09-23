@@ -14,6 +14,6 @@ http://www.gnu.org/licenses/gpl.html
 
 Обратная связь
 --------------
-Адрес электронной почты — DmitryBowie@gmail.com. Прошу указывать тему сообщений.
+Адрес электронной почты — DmitryBowie<at>gmail.com. Прошу указывать тему сообщений.
 
 Блог — http://DmitryBowie.blogspot.ru 
