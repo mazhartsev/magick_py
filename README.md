@@ -16,4 +16,4 @@ http://www.gnu.org/licenses/gpl.html
 --------------
 Адрес электронной почты — DmitryBowie<at>gmail.com. Прошу указывать тему сообщений.
 
-Блог — http://DmitryBowie.blogspot.ru 
+Блог про LibreOffice: http://librerussia.blogspot.ru
