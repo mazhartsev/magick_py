@@ -41,19 +41,21 @@ print('\nПапка с обработанными файлами %s \n' % (out))
 
 img_list = [] # пустой список для изображений
 file_list = os.listdir(img_dir) # список всех файлов в папке
-#print(file_list)
+print(file_list)
+
+b = 0 # счетчик количества необработанных изображений
 
 for file in file_list:
     for i in extension:
         if file.endswith(i):
             img_list.append(file)
-        else:
-            print('Файл %s имеет недопустимый формат. \nДопустимый формат JPEG или TIFF.\n' % (file))
+            
+trash_list = list(set(file_list).difference(img_list))
+
 
 print('Файлы для обработки:')
 print(img_list)
 c = 0 # счетчик количества обработанных изображений
-b = 0 # счетчик количества необработанных изображений
 bl = [] # список для необработанных изображений
 
 for file in img_list:
@@ -82,9 +84,12 @@ for file in img_list:
             #print(str)
             os.popen(str)
         print(c)
+
+for i in trash_list:
+    b+=1
+    print('\nФайл %s имеет недопустимый формат. \nДопутисмый формат JPEG и TIFF.' % (i))
         
 print('\n\nВсего обработано - %s' % (c))
 print('Оставлено без изменений - %s' % (b))
-print(bl)
 
 input('\nНажмите Enter')
