@@ -69,13 +69,13 @@ for file in img_list:
         
         
         if file_w >= file_h:    # если ширина больше высоты
-           str = 'convert "%s" -density %sx -quality 95 -colorspace GRAY %s/"%s"' % (file, dpi, out, file) # Дополнительные кавычки вокруг имен файлов служать для экранирования пробелов в именах
+           str = 'convert "%s" -density %sx -quality 80 -colorspace GRAY %s/"%s"' % (file, dpi, out, file) # Дополнительные кавычки вокруг имен файлов служать для экранирования пробелов в именах
            print('Выполняется преобразование')
            os.popen(str)
                
             
         else:   # если высота больше ширины
-            str = 'convert "%s" -density x%s -quality 95 -colorspace GRAY %s/"%s"' % (file, dpi, out, file) # Дополнительные кавычки вокруг имен файлов служать для экранирования пробелов в именах
+            str = 'convert "%s" -density x%s -quality 80 -colorspace GRAY %s/"%s"' % (file, dpi, out, file) # Дополнительные кавычки вокруг имен файлов служать для экранирования пробелов в именах
             print('Выполняется преобразование')
             #print(str)
             os.popen(str)
