@@ -13,7 +13,7 @@ import shutil
 dpi = '250' # Значение DPI (точек на дюйм)
 width = '250'   # DPI (точек на дюйм)
 height = '250'  # DPI (точек на дюйм)
-extension = ['jpg', 'JPG', 'JPEG','jpeg', 'png', 'gif', 'tiff', 'tif'] # Расширения\Форматы
+extension = ['jpg', 'JPG', 'JPEG','jpeg', 'tiff', 'tif'] # Расширения\Форматы
 
 #################### Конец параметров пользователя #####################
 ########################################################################
@@ -47,6 +47,8 @@ for file in file_list:
     for i in extension:
         if file.endswith(i):
             img_list.append(file)
+        else:
+            print('Файл %s имеет недопустимый формат. \nДопустимый формат JPEG или TIFF.\n' % (file))
 
 print('Файлы для обработки:')
 print(img_list)
