@@ -1,18 +1,26 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
-# Скрипт для массового преобразования изображения для отправки в налоговую, согласно требованиям пункта 3.3 приказа ФНС России от 09.11.2010 N ММВ-7-6/535@
+
+# Скрипт для массового преобразования изображения для отправки в налоговую, 
+# согласно требованиям пункта 3.3 приказа ФНС России от 09.11.2010 N ММВ-7-6/535@:
+# - 256 градаций серого;
+# - разрешение 150-300 DPI (точек на дюйм);
+# - глубину цвета 8.
+
 # Copyright (c) 2015, Dmitry Mazhartsev
 # GNU General Public License Version 3
+
 import __future__
 import os
 import sys
 import shutil
+
 ########################################################################
 ######################## Параметры пользователя ########################
 
-dpi = '250' # Значение DPI (точек на дюйм)
-width = '250'   # DPI (точек на дюйм)
-height = '250'  # DPI (точек на дюйм)
+dpi = '250'      # Значение DPI (точек на дюйм)
+width = '2000'   # Требуемая ширина в пикселях
+height = '2000'  # Требуемая высота в пикселях
 extension = ['jpg', 'JPG', 'JPEG','jpeg', 'tiff', 'tif'] # Расширения\Форматы
 
 #################### Конец параметров пользователя #####################
@@ -43,7 +51,6 @@ img_list = [] # пустой список для изображений
 file_list = os.listdir(img_dir) # список всех файлов в папке
 print(file_list)
 
-b = 0 # счетчик количества необработанных изображений
 
 for file in file_list:
     for i in extension:
@@ -56,7 +63,7 @@ trash_list = list(set(file_list).difference(img_list))
 print('Файлы для обработки:')
 print(img_list)
 c = 0 # счетчик количества обработанных изображений
-bl = [] # список для необработанных изображений
+b = 0 # счетчик количества необработанных изображений
 
 for file in img_list:
     c+=1
@@ -71,19 +78,31 @@ for file in img_list:
         print('Ширина => %s' % (file_w))
         print('Высота => %s' % (file_w))
         
-        
         if file_w >= file_h:    # если ширина больше высоты
-           str = 'convert "%s" -density %sx -quality 80 -colorspace GRAY %s/"%s"' % (file, dpi, out, file) # Дополнительные кавычки вокруг имен файлов служать для экранирования пробелов в именах
-           print('Выполняется преобразование')
-           os.popen(str)
-               
+            if file_w <= int(width): # если ширина исходного изображения меньше заданной
+                print('Файл уже нужного размера или меньше')
+                str = 'convert "%s" -density %sx -quality 80 -colorspace GRAY %s/"%s"' % (file, dpi, out, file) # Дополнительные кавычки вокруг имен файлов служать для экранирования пробелов в именах
+                print('Выполняется преобразование')
+                os.popen(str)
+                break
+            else:
+                str = 'convert "%s" -resize %sx -density %sx -quality 80 -colorspace GRAY %s/"%s"' % (file, width, dpi, out, file) # Дополнительные кавычки вокруг имен файлов служать для экранирования пробелов в именах
+                print('Выполняется преобразование')
+                os.popen(str)
             
         else:   # если высота больше ширины
-            str = 'convert "%s" -density x%s -quality 80 -colorspace GRAY %s/"%s"' % (file, dpi, out, file) # Дополнительные кавычки вокруг имен файлов служать для экранирования пробелов в именах
-            print('Выполняется преобразование')
-            #print(str)
-            os.popen(str)
-        print(c)
+            if file_h <= int(height): # если высота исходного изображения меньше заданной
+                print('Файл уже нужного размера или меньше')
+                str = 'convert "%s" -density x%s -quality 80 -colorspace GRAY %s/"%s"' % (file, dpi, out, file) # Дополнительные кавычки вокруг имен файлов служать для экранирования пробелов в именах
+                print('Выполняется преобразование')
+                os.popen(str)
+                break
+            else:
+                str = 'convert "%s" -resize x%s -density x%s -quality 80 -colorspace GRAY %s/"%s"' % (file, height, dpi, out, file) # Дополнительные кавычки вокруг имен файлов служать для экранирования пробелов в именах
+                print('Выполняется преобразование')
+                #print(str)
+                os.popen(str)
+
 
 for i in trash_list:
     b+=1
