@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
-
+# Скрипт для массового преобразования изображения для отправки в налоговую, согласно требованиям пункта 3.3 приказа ФНС России от 09.11.2010 N ММВ-7-6/535@
 # Copyright (c) 2015, Dmitry Mazhartsev
 # GNU General Public License Version 3
 import __future__
